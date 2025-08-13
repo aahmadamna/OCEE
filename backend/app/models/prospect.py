@@ -23,6 +23,4 @@ class Prospect(Base):
 
     created_at = Column(DateTime, default=datetime.utcnow)
 
-    # Relationships (filled in later by related models)
-    decks = relationship("Deck", back_populates="prospect", cascade="all, delete-orphan")
-    sequences = relationship("EmailSequence", back_populates="prospect", cascade="all, delete-orphan")
+    
