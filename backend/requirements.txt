@@ -4,3 +4,7 @@ sqlalchemy
 pydantic
 pydantic-settings
 python-multipart
+jinja2
+weasyprint
+openai
+email-validator

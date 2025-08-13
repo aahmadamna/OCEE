@@ -18,9 +18,13 @@ class Prospect(Base):
     revenue_range = Column(String, nullable=True)
     location = Column(String, nullable=True)
     sale_motivation = Column(Text, nullable=True)
-    signals = Column(Text, nullable=True)   # short notes like “owner retiring”
+    signals = Column(Text, nullable=True)   # short notes like "owner retiring"
     notes = Column(Text, nullable=True)
 
     created_at = Column(DateTime, default=datetime.utcnow)
+
+    # Relationships (filled in later by related models)
+    decks = relationship("Deck", back_populates="prospect", cascade="all, delete-orphan")
+    sequences = relationship("EmailSequence", back_populates="prospect", cascade="all, delete-orphan")
 
     
