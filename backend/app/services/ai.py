@@ -1,8 +1,13 @@
 from __future__ import annotations
 
 import json
+import logging
 from typing import Any, Dict, List
 from ..config import settings
+
+# Set up logging
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
 # Fixed slide schema (order + canonical titles)
 SLIDE_SCHEMA = [
@@ -81,7 +86,15 @@ def _openai_json_response(prompt: str) -> Dict[str, Any] | List[Any]:
             temperature=0.5,
             response_format={"type": "json_object"},
         )
-        return json.loads(resp.choices[0].message.content)
+        raw_response = resp.choices[0].message.content
+        parsed_response = json.loads(raw_response)
+        
+        # Log the raw AI output
+        logger.info("=== RAW AI OUTPUT ===")
+        logger.info(f"Raw JSON response: {raw_response}")
+        logger.info("=== END RAW AI OUTPUT ===")
+        
+        return parsed_response
     except Exception as e:
         raise AIUnavailableError(f"OpenAI call failed: {e!s}")
 
