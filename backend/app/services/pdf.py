@@ -42,7 +42,7 @@ def render_deck_to_pdf(slides: List[Dict], deck_title: str, out_dir: str | None 
     abs_path = os.path.join(out_dir, filename)
 
     try:
-        HTML(string=html, base_url=out_dir).write_pdf(abs_path)
+        HTML(string=html, base_url=settings.APP_BASE_URL).write_pdf(abs_path)
     except Exception as e:
         raise RenderError(f"Failed to render PDF: {e!s}")
 

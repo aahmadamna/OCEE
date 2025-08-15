@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
+app.mount("static", StaticFiles(directory="backend/static"), name="static")
 import os
 
 from .config import settings
